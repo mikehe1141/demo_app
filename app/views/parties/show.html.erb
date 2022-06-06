@@ -1,0 +1,21 @@
+<div class="flex flex-col gap-5">
+  <div>
+    <h1 class="mb-5 text-2xl">Party</h1>
+    <ul>
+      <li>Name: <%= @party.title %></li>
+      <li>Party at: <%= @party.party_at %></li>
+      <li>Total Guests: <%= @party.total_guests %></li>
+    </ul>
+  </div>
+
+  <div>
+    <h2 class="mb-5 text-xl">Guests</h2>
+    <% @party.guests.each do |guest| %>
+      <ul class="mb-5">
+        <li>Name: <%= guest.name %></li>
+        <li>RSVP Count: <%= guest.rsvp_count %></li>
+        <li>Dietary Option: <%= guest.dietary_info %></li>
+      </ul>
+    <% end %>
+  </div>
+</div>

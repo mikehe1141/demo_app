@@ -1,0 +1,27 @@
+<div
+  class="flex items-center justify-center gap-14 mb-4"
+  data-dynamic-form-target="fields"
+>
+  <div>
+    <%= guests_form.label :name, class: "form__label" %>
+    <%= guests_form.text_field :name %>
+  </div>
+  <div>
+    <%= guests_form.label :rsvp_count, "RSVP Count", class: "form__label" %>
+    <%= guests_form.number_field :rsvp_count, size: 5 %>
+  </div>
+  <div>
+    <label class="form__label">Dietary Info</label>
+
+    <%= guests_form.collection_radio_buttons :dietary_info, Guest.dietary_options, :name, :value do |diet_button| %>
+      <%= diet_button.label %>
+      <%= diet_button.radio_button %>
+    <% end %>
+  </div>
+  <div>
+    <button
+      class="btn btn--negative"
+      data-action="click->dynamic-form#removeFields"
+    >Remove Guest</button>
+  </div>
+</div>

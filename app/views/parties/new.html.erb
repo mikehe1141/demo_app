@@ -1,0 +1,43 @@
+<div>
+  <h1 class="text-center mb-5 text-2xl">Party Planner</h1>
+
+  <%= form_with model: @party do |form| %>
+    <h2 class="text-center mb-5 text-xl">Party Details</h2>
+    <div class="flex justify-center gap-8 mb-14">
+      <div>
+        <%= form.label :title, "Party Name", class: "form__label" %>
+        <%= form.text_field :title %>
+      </div>
+
+      <div>
+        <%= form.label :party_at, "Party At", class: "form__label" %>
+        <%= form.datetime_local_field :party_at %>
+      </div>
+    </div>
+
+    <h2 class="text-center mb-5 text-xl">Guest Details</h2>
+    <div class="guest-fields" data-controller="dynamic-form" data-dynamic-form-current-index-value="0">
+      <template data-dynamic-form-target="template">
+        <%= form.fields_for :guests, Guest.new, child_index: "NEW_FORM" do |guests_form| %>
+          <%= render "guest_field", guests_form: guests_form %>
+        <% end %>
+      </template>
+
+      <div class="flex justify-center mb-2">
+        <button
+          class="btn btn--positive"
+          data-action="click->dynamic-form#addFields"
+        >Add Guest</button>
+      </div>
+      <div data-dynamic-form-target="fieldsContainer">
+        <%= form.fields_for :guests, Guest.new do |guests_form| %>
+          <%= render "guest_field", guests_form: guests_form %>
+        <% end %>
+      </div>
+    </div>
+
+    <div>
+      <%= form.submit class: "btn btn--primary" %>
+    </div>
+  <% end %>
+</div>
